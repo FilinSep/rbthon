@@ -151,6 +151,29 @@ class RobloxUserGET():
 
             return ageBracketAPIdata
         
+    def authenticated(self):
+
+        # uses .ROBLOSECURITY COOKIE
+        # answer:
+        # id, name, displayName
+
+        jsonanswer = requests.get('https://users.roblox.com/v1/users/authenticated', cookies={".ROBLOSECURITY": self.Cookie}).json()
+
+        if "errors" in jsonanswer:
+            
+            raise AuthorizationDeniedError
+        
+        else:
+
+            class ageBracketAPIdata():
+                
+                answer = jsonanswer
+                id = jsonanswer["id"]
+                name = jsonanswer["name"]
+                displayName = jsonanswer["displayName"]
+
+            return ageBracketAPIdata
+        
 
 # API POST METHODS
 class RobloxUserPOST():
