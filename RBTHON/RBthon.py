@@ -1,8 +1,21 @@
 # RBThon - BEST ROBLOX API MODULE!
 
-from errors import *
 import requests
 from bs4 import BeautifulSoup as bs
+
+# ERRORS
+
+class IDNotFoundError(Exception):
+    pass
+
+class NotFoundError(Exception):
+    pass
+
+class AuthorizationDeniedError(Exception):
+    pass
+
+class PostError(Exception):
+    pass
 
 # API GET METHODS
 class RobloxUserGET():
