@@ -56,6 +56,32 @@ class RobloxUserGET():
                 displayName = jsonanswer["displayName"]
 
             return UserAPIdata
+    
+    def mobileuser(self):
+
+        # uses .ROBLOSECURITY COOKIE
+        # answer:
+        # UserID, UserName, RobuxBalance, ThumbnailUrl, IsAnyBuildersClubMember, IsPremium
+
+        jsonanswer = requests.get('https://www.roblox.com/mobileapi/userinfo', cookies={".ROBLOSECURITY": self.Cookie}).json()
+
+        if "errors" in jsonanswer:
+            
+            raise IDNotFoundError
+        
+        else:
+
+            class UserAPIdata():
+                
+                answer = jsonanswer
+                UserID = jsonanswer["UserID"]
+                UserName = jsonanswer["UserName"]
+                RobuxBalance = jsonanswer["RobuxBalance"]
+                ThumbnailUrl = jsonanswer["ThumbnailUrl"]
+                IsAnyBuildersClubMember = jsonanswer["IsAnyBuildersClubMember"]
+                IsPremium = jsonanswer["IsPremium"]
+
+            return UserAPIdata
         
     def birthdate(self):
 
