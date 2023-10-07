@@ -213,6 +213,68 @@ class RobloxUserGET():
 
             return ageBracketAPIdata
         
+    def friendslist(self):
+
+        # uses id
+        # answer:
+        # friends dict with isOnline, isDeleted, friendFrequentScore, friendFrequentRank, hasVerifiedBadge, description, created, isBanned, externalAppDisplayName, id, name, displayName
+        # ONLY JSON ANSWER
+
+        jsonanswer = requests.get(f'https://friends.roblox.com/v1/users/{self.Id}/friends').json()
+
+        if "errors" in jsonanswer:
+            
+            raise NotFoundError
+        
+        else:
+
+            class friendslistAPIData():
+                
+                answer = jsonanswer
+
+            return friendslistAPIData
+        
+    def friendscount(self):
+
+        # uses .ROBLOSECURITY COOKIE
+        # answer:
+        # count
+
+
+        jsonanswer = requests.get(f'https://friends.roblox.com/v1/users/{self.Id}/friends/count').json()
+
+        if "errors" in jsonanswer:
+            
+            raise NotFoundError
+        
+        else:
+
+            class friendslistAPIData():
+                
+                answer = jsonanswer
+
+            return friendslistAPIData
+        
+    def conversationslist(self):
+
+        # uses id
+        # answer:
+        # ONLY JSON ANSWER
+
+
+        jsonanswer = requests.get('https://chat.roblox.com/v2/get-user-conversations?pageNumber=1&pageSize=250', cookies={".ROBLOSECURITY": self.Cookie}).json()
+
+        if "errors" in jsonanswer:
+            
+            raise NotFoundError
+        
+        else:
+
+            class convsAPIdata():
+                
+                answer = jsonanswer
+
+            return convsAPIdata
 
 # API POST METHODS
 class RobloxUserPOST():
@@ -251,3 +313,11 @@ class RobloxUserPOST():
                                 headers={'X-CSRF-TOKEN':self.CSRF})
 
         return answer.json()
+        
+    def send_inbox_message(self, json):
+        req = requests.post('https://privatemessages.roblox.com/v1/messages/send', 
+                            json=json, 
+                            cookies={".ROBLOSECURITY": self.Cookie},
+                            headers={'X-CSRF-TOKEN':self.CSRF})
+        
+        return req.json()
