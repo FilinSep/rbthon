@@ -1,5 +1,7 @@
 # rbthon
-Roblox User API Module written on Python!
+Easy roblox user API Module written on Python!
+
+Work more comfortably with important apis for Users!
 
 USED LIBS:
 *bs4*
